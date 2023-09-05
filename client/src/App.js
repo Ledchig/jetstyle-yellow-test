@@ -17,7 +17,6 @@ const App = () => {
 
   const getData = async () => {
     const response = await fetch('api/data');
-    console.log(response);
     const body = await response.json();
     if (response.status !== 200) {
       throw Error(body.message)

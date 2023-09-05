@@ -20,7 +20,6 @@ app.get('/api/data', (req, res) => {
 app.post('/api/addBook', async (req, res) => {
   const data = JSON.parse(fs.readFileSync('./data.json', 'utf-8'));
   const reqData = req.body;
-  console.log(req.body);
   const author = data.authors.find((el) => el.author === reqData.author);
   const newAuthor = author === undefined ? { 
     id: data.authors.length + 1,
@@ -34,7 +33,6 @@ app.post('/api/addBook', async (req, res) => {
     title: reqData.book,
   };
   const newData = { books: [...data.books, newBook], authors: [...data.authors, newAuthor] };
-  console.log(newData);
   fs.writeFileSync('./data.json', JSON.stringify(newData, null, '  '));
 })
 
