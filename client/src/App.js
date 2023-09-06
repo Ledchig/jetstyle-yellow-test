@@ -27,6 +27,11 @@ const App = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  /**
+   * вот тут наглядный пример принятого решения на бекенде
+   * приходится делать два запроса, вместо того чтобы
+   * получать обновленные данные из первого запроса 
+   */
   const handleSubmitForm = async (e) => {
     e.preventDefault();
     handleClose();
@@ -45,7 +50,11 @@ const App = () => {
       .then(res => setState(res))
       .catch(err => console.error(err));
   }, [state]);
-
+  /**
+   * в целом хорошая идея использовать готовые библиотеки
+   * хорошо бы еще научится стилизовать компоненты
+   * чтобы они соответствовали макету не только формально
+   */
   return (
     <Container>
       <Navbar className='justify-content-between m-5'>
@@ -99,6 +108,13 @@ const App = () => {
                 <tr key={book.id}>
                   <th>{book.id}</th>
                   <th>
+                    {/**
+                     * очень интересное решение мне понравилось как оно выглядит
+                     * однако есть проблемы, что при нажатии на другом авторе
+                     * на экране появляется еще один тултип или попап, не важно как называется
+                     * это не очень хорошо как с точки зрения дизайна, так и производительности
+                     * очень хорошо было скрывать старую, перед тем как показать новую
+                     */}
                     <OverlayTrigger trigger="click" placement="right" overlay={
                       <Popover id="bio">
                       <Popover.Header as="h3" className='text-white' style={{ backgroundColor: '#E36A13' }}>Цитата автора</Popover.Header>
