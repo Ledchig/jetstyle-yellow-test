@@ -1,5 +1,6 @@
 import express from 'express';
 import fs from 'fs';
+import path from 'path';
 
 const encode = (string) => {
   const bytes = new TextEncoder().encode(string);
@@ -11,6 +12,7 @@ const app = express();
 const port = process.env.PORT || 5001;
 
 app.use(express.json());
+app.use(express.static(path.join('client/build')));
 
 app.get('/api/data', (req, res) => {
     const data = JSON.parse(fs.readFileSync('./data.json', 'utf-8'));
